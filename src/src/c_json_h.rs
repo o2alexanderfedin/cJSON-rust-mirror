@@ -1,5 +1,23 @@
 use super::*;
 
+pub const cJSON_False: i32 = 0;
+
+pub const cJSON_True: i32 = 1;
+
+pub const cJSON_NULL: i32 = 2;
+
+pub const cJSON_Number: i32 = 3;
+
+pub const cJSON_String: i32 = 4;
+
+pub const cJSON_Array: i32 = 5;
+
+pub const cJSON_Object: i32 = 6;
+
+pub const cJSON_IsReference: i32 = 256;
+
+pub const cJSON_StringIsConst: i32 = 512;
+
 /// The cJSON structure:
 #[repr(C)]
 #[derive(Copy, Clone)]
