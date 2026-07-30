@@ -70,10 +70,9 @@ extern "C" fn parse_hex4(mut str: *const i8) -> u32 {
     }
     h = h << 4;
     {
+        let __n = 1;
         let __p = &mut str;
-        let __t = *__p;
-        *__p = unsafe { (*__p).offset(1) };
-        __t
+        *__p = unsafe { (*__p).offset(__n as isize) };
     };
     if unsafe { *str } as i32 >= '0' as i32 && unsafe { *str } as i32 <= '9' as i32 {
         h = h.wrapping_add((unsafe { *str } as i32 - '0' as i32) as u32);
@@ -86,10 +85,9 @@ extern "C" fn parse_hex4(mut str: *const i8) -> u32 {
     }
     h = h << 4;
     {
+        let __n = 1;
         let __p = &mut str;
-        let __t = *__p;
-        *__p = unsafe { (*__p).offset(1) };
-        __t
+        *__p = unsafe { (*__p).offset(__n as isize) };
     };
     if unsafe { *str } as i32 >= '0' as i32 && unsafe { *str } as i32 <= '9' as i32 {
         h = h.wrapping_add((unsafe { *str } as i32 - '0' as i32) as u32);
@@ -102,10 +100,9 @@ extern "C" fn parse_hex4(mut str: *const i8) -> u32 {
     }
     h = h << 4;
     {
+        let __n = 1;
         let __p = &mut str;
-        let __t = *__p;
-        *__p = unsafe { (*__p).offset(1) };
-        __t
+        *__p = unsafe { (*__p).offset(__n as isize) };
     };
     if unsafe { *str } as i32 >= '0' as i32 && unsafe { *str } as i32 <= '9' as i32 {
         h = h.wrapping_add((unsafe { *str } as i32 - '0' as i32) as u32);
@@ -138,26 +135,23 @@ extern "C" fn parse_string(item: &mut CJSON, str: *const i8) -> *const i8 {
             return core::ptr::null();
         }
         while unsafe { *ptr } as i32 != '\"' as i32 && unsafe { *ptr } != 0 && {
-            let __p = &mut len;
-            *__p += 1;
-            *__p
+            len += 1;
+            len
         } != 0
         {
             if unsafe {
                 *{
-                    let __p = &mut ptr;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = ptr;
+                    ptr = unsafe { ptr.offset(1) };
+                    __old
                 }
             } as i32
                 == '\\' as i32
             {
                 {
-                    let __p = &mut ptr;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = ptr;
+                    ptr = unsafe { ptr.offset(1) };
+                    __old
                 };
             }
         }
@@ -173,75 +167,67 @@ extern "C" fn parse_string(item: &mut CJSON, str: *const i8) -> *const i8 {
             if unsafe { *ptr } as i32 != '\\' as i32 {
                 unsafe {
                     *{
-                        let __p = &mut ptr2;
-                        let __t = *__p;
-                        *__p = unsafe { (*__p).offset(1) };
-                        __t
+                        let __old = ptr2;
+                        ptr2 = unsafe { ptr2.offset(1) };
+                        __old
                     } = unsafe {
                         *{
-                            let __p = &mut ptr;
-                            let __t = *__p;
-                            *__p = unsafe { (*__p).offset(1) };
-                            __t
+                            let __old = ptr;
+                            ptr = unsafe { ptr.offset(1) };
+                            __old
                         }
                     } as i8
                 };
             } else {
                 {
+                    let __n = 1;
                     let __p = &mut ptr;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    *__p = unsafe { (*__p).offset(__n as isize) };
                 };
                 '__s2: {
                     match unsafe { *ptr } {
                         98 => {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr2;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr2;
+                                    ptr2 = unsafe { ptr2.offset(1) };
+                                    __old
                                 } = '\u{8}' as i32 as i8
                             };
                         }
                         102 => {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr2;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr2;
+                                    ptr2 = unsafe { ptr2.offset(1) };
+                                    __old
                                 } = '\u{c}' as i32 as i8
                             };
                         }
                         110 => {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr2;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr2;
+                                    ptr2 = unsafe { ptr2.offset(1) };
+                                    __old
                                 } = '\n' as i32 as i8
                             };
                         }
                         114 => {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr2;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr2;
+                                    ptr2 = unsafe { ptr2.offset(1) };
+                                    __old
                                 } = '\r' as i32 as i8
                             };
                         }
                         116 => {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr2;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr2;
+                                    ptr2 = unsafe { ptr2.offset(1) };
+                                    __old
                                 } = '\t' as i32 as i8
                             };
                         }
@@ -295,84 +281,74 @@ extern "C" fn parse_string(item: &mut CJSON, str: *const i8) -> *const i8 {
                                     4 => {
                                         unsafe {
                                             *{
-                                                let __p = &mut ptr2;
-                                                *__p = unsafe { (*__p).offset(-1) };
-                                                *__p
+                                                ptr2 = unsafe { ptr2.offset(-1) };
+                                                ptr2
                                             } = ((uc | 128 as u32) & 191 as u32) as i8
                                         };
                                         uc >>= 6 as u32;
                                         unsafe {
                                             *{
-                                                let __p = &mut ptr2;
-                                                *__p = unsafe { (*__p).offset(-1) };
-                                                *__p
+                                                ptr2 = unsafe { ptr2.offset(-1) };
+                                                ptr2
                                             } = ((uc | 128 as u32) & 191 as u32) as i8
                                         };
                                         uc >>= 6 as u32;
                                         unsafe {
                                             *{
-                                                let __p = &mut ptr2;
-                                                *__p = unsafe { (*__p).offset(-1) };
-                                                *__p
+                                                ptr2 = unsafe { ptr2.offset(-1) };
+                                                ptr2
                                             } = ((uc | 128 as u32) & 191 as u32) as i8
                                         };
                                         uc >>= 6 as u32;
                                         unsafe {
                                             *{
-                                                let __p = &mut ptr2;
-                                                *__p = unsafe { (*__p).offset(-1) };
-                                                *__p
+                                                ptr2 = unsafe { ptr2.offset(-1) };
+                                                ptr2
                                             } = (uc | first_byte_mark[len as usize] as u32) as i8
                                         };
                                     }
                                     3 => {
                                         unsafe {
                                             *{
-                                                let __p = &mut ptr2;
-                                                *__p = unsafe { (*__p).offset(-1) };
-                                                *__p
+                                                ptr2 = unsafe { ptr2.offset(-1) };
+                                                ptr2
                                             } = ((uc | 128 as u32) & 191 as u32) as i8
                                         };
                                         uc >>= 6 as u32;
                                         unsafe {
                                             *{
-                                                let __p = &mut ptr2;
-                                                *__p = unsafe { (*__p).offset(-1) };
-                                                *__p
+                                                ptr2 = unsafe { ptr2.offset(-1) };
+                                                ptr2
                                             } = ((uc | 128 as u32) & 191 as u32) as i8
                                         };
                                         uc >>= 6 as u32;
                                         unsafe {
                                             *{
-                                                let __p = &mut ptr2;
-                                                *__p = unsafe { (*__p).offset(-1) };
-                                                *__p
+                                                ptr2 = unsafe { ptr2.offset(-1) };
+                                                ptr2
                                             } = (uc | first_byte_mark[len as usize] as u32) as i8
                                         };
                                     }
                                     2 => {
                                         unsafe {
                                             *{
-                                                let __p = &mut ptr2;
-                                                *__p = unsafe { (*__p).offset(-1) };
-                                                *__p
+                                                ptr2 = unsafe { ptr2.offset(-1) };
+                                                ptr2
                                             } = ((uc | 128 as u32) & 191 as u32) as i8
                                         };
                                         uc >>= 6 as u32;
                                         unsafe {
                                             *{
-                                                let __p = &mut ptr2;
-                                                *__p = unsafe { (*__p).offset(-1) };
-                                                *__p
+                                                ptr2 = unsafe { ptr2.offset(-1) };
+                                                ptr2
                                             } = (uc | first_byte_mark[len as usize] as u32) as i8
                                         };
                                     }
                                     1 => {
                                         unsafe {
                                             *{
-                                                let __p = &mut ptr2;
-                                                *__p = unsafe { (*__p).offset(-1) };
-                                                *__p
+                                                ptr2 = unsafe { ptr2.offset(-1) };
+                                                ptr2
                                             } = (uc | first_byte_mark[len as usize] as u32) as i8
                                         };
                                     }
@@ -388,30 +364,27 @@ extern "C" fn parse_string(item: &mut CJSON, str: *const i8) -> *const i8 {
                         _ => {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr2;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr2;
+                                    ptr2 = unsafe { ptr2.offset(1) };
+                                    __old
                                 } = unsafe { *ptr } as i8
                             };
                         }
                     }
                 }
                 {
+                    let __n = 1;
                     let __p = &mut ptr;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    *__p = unsafe { (*__p).offset(__n as isize) };
                 };
             }
         }
         unsafe { *ptr2 = 0 as i8 };
         if unsafe { *ptr } as i32 == '\"' as i32 {
             {
-                let __p = &mut ptr;
-                let __t = *__p;
-                *__p = unsafe { (*__p).offset(1) };
-                __t
+                let __old = ptr;
+                ptr = unsafe { ptr.offset(1) };
+                __old
             };
         }
         (*item).valuestring = out;
@@ -432,19 +405,17 @@ extern "C" fn parse_number(item: &mut CJSON, mut num: *const i8) -> *const i8 {
         {
             sign = -1 as f64;
             {
-                let __p = &mut num;
-                let __t = *__p;
-                *__p = unsafe { (*__p).offset(1) };
-                __t
+                let __old = num;
+                num = unsafe { num.offset(1) };
+                __old
             }
         };
     }
     if unsafe { *num } as i32 == '0' as i32 {
         {
-            let __p = &mut num;
-            let __t = *__p;
-            *__p = unsafe { (*__p).offset(1) };
-            __t
+            let __old = num;
+            num = unsafe { num.offset(1) };
+            __old
         };
     }
     if unsafe { *num } as i32 >= '1' as i32 && unsafe { *num } as i32 <= '9' as i32 {
@@ -453,10 +424,9 @@ extern "C" fn parse_number(item: &mut CJSON, mut num: *const i8) -> *const i8 {
                 n = n * 10.0
                     + (unsafe {
                         *{
-                            let __p = &mut num;
-                            let __t = *__p;
-                            *__p = unsafe { (*__p).offset(1) };
-                            __t
+                            let __old = num;
+                            num = unsafe { num.offset(1) };
+                            __old
                         }
                     } as i32
                         - '0' as i32) as f64;
@@ -472,10 +442,9 @@ extern "C" fn parse_number(item: &mut CJSON, mut num: *const i8) -> *const i8 {
         && unsafe { *num.offset(1 as isize) } as i32 <= '9' as i32
     {
         {
+            let __n = 1;
             let __p = &mut num;
-            let __t = *__p;
-            *__p = unsafe { (*__p).offset(1) };
-            __t
+            *__p = unsafe { (*__p).offset(__n as isize) };
         };
         '__b5: loop {
             '__c5: loop {
@@ -483,18 +452,16 @@ extern "C" fn parse_number(item: &mut CJSON, mut num: *const i8) -> *const i8 {
                     n = n * 10.0
                         + (unsafe {
                             *{
-                                let __p = &mut num;
-                                let __t = *__p;
-                                *__p = unsafe { (*__p).offset(1) };
-                                __t
+                                let __old = num;
+                                num = unsafe { num.offset(1) };
+                                __old
                             }
                         } as i32
                             - '0' as i32) as f64;
                     {
-                        let __p = &mut scale;
-                        let __t = *__p;
-                        *__p -= 1;
-                        __t
+                        let __old = scale;
+                        scale -= 1;
+                        __old
                     }
                 };
                 break '__c5;
@@ -506,26 +473,23 @@ extern "C" fn parse_number(item: &mut CJSON, mut num: *const i8) -> *const i8 {
     }
     if unsafe { *num } as i32 == 'e' as i32 || unsafe { *num } as i32 == 'E' as i32 {
         {
+            let __n = 1;
             let __p = &mut num;
-            let __t = *__p;
-            *__p = unsafe { (*__p).offset(1) };
-            __t
+            *__p = unsafe { (*__p).offset(__n as isize) };
         };
         if unsafe { *num } as i32 == '+' as i32 {
             {
-                let __p = &mut num;
-                let __t = *__p;
-                *__p = unsafe { (*__p).offset(1) };
-                __t
+                let __old = num;
+                num = unsafe { num.offset(1) };
+                __old
             };
         } else if unsafe { *num } as i32 == '-' as i32 {
             {
                 signsubscale = -1;
                 {
-                    let __p = &mut num;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = num;
+                    num = unsafe { num.offset(1) };
+                    __old
                 }
             };
         }
@@ -533,10 +497,9 @@ extern "C" fn parse_number(item: &mut CJSON, mut num: *const i8) -> *const i8 {
             subscale = subscale * 10
                 + (unsafe {
                     *{
-                        let __p = &mut num;
-                        let __t = *__p;
-                        *__p = unsafe { (*__p).offset(1) };
-                        __t
+                        let __old = num;
+                        num = unsafe { num.offset(1) };
+                        __old
                     }
                 } as i32
                     - '0' as i32);
@@ -555,10 +518,9 @@ extern "C" fn parse_number(item: &mut CJSON, mut num: *const i8) -> *const i8 {
 extern "C" fn skip(mut in__1: *const i8) -> *const i8 {
     while !(in__1).is_null() && unsafe { *in__1 } != 0 && unsafe { *in__1 } as u8 as i32 <= 32 {
         {
-            let __p = &mut in__1;
-            let __t = *__p;
-            *__p = unsafe { (*__p).offset(1) };
-            __t
+            let __old = in__1;
+            in__1 = unsafe { in__1.offset(1) };
+            __old
         };
     }
     return in__1;
@@ -830,7 +792,7 @@ pub(crate) extern "C" fn c_json_parse(value: *const i8) -> *mut CJSON {
 }
 
 #[repr(C)]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Default)]
 pub(crate) struct Printbuffer {
     pub(crate) buffer: *mut i8,
     pub(crate) length: i32,
@@ -838,11 +800,7 @@ pub(crate) struct Printbuffer {
 }
 
 extern "C" fn pow2gt(mut x: i32) -> i32 {
-    {
-        let __p = &mut x;
-        *__p -= 1;
-        *__p
-    };
+    x -= 1;
     x |= x >> 1;
     x |= x >> 2;
     x |= x >> 4;
@@ -1008,10 +966,9 @@ extern "C" fn print_string_ptr(str: *const i8, p: *mut Printbuffer) -> *mut i8 {
                     break '__c11;
                 }
                 {
+                    let __n = 1;
                     let __p = &mut ptr;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    *__p = unsafe { (*__p).offset(__n as isize) };
                 };
             }
         }
@@ -1028,10 +985,9 @@ extern "C" fn print_string_ptr(str: *const i8, p: *mut Printbuffer) -> *mut i8 {
             ptr2 = out;
             unsafe {
                 *{
-                    let __p = &mut ptr2;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = ptr2;
+                    ptr2 = unsafe { ptr2.offset(1) };
+                    __old
                 } = '\"' as i32 as i8
             };
             unsafe {
@@ -1065,9 +1021,8 @@ extern "C" fn print_string_ptr(str: *const i8, p: *mut Printbuffer) -> *mut i8 {
             token
         } != 0
             && {
-                let __p = &mut len;
-                *__p += 1;
-                *__p
+                len += 1;
+                len
             } != 0
         {
             if !(unsafe {
@@ -1079,19 +1034,17 @@ extern "C" fn print_string_ptr(str: *const i8, p: *mut Printbuffer) -> *mut i8 {
             .is_null()
             {
                 {
-                    let __p = &mut len;
-                    let __t = *__p;
-                    *__p += 1;
-                    __t
+                    let __old = len;
+                    len += 1;
+                    __old
                 };
             } else if (token as i32) < 32 {
                 len += 5;
             }
             {
+                let __n = 1;
                 let __p = &mut ptr;
-                let __t = *__p;
-                *__p = unsafe { (*__p).offset(1) };
-                __t
+                *__p = unsafe { (*__p).offset(__n as isize) };
             };
         }
         if !(p).is_null() {
@@ -1106,10 +1059,9 @@ extern "C" fn print_string_ptr(str: *const i8, p: *mut Printbuffer) -> *mut i8 {
         ptr = str;
         unsafe {
             *{
-                let __p = &mut ptr2;
-                let __t = *__p;
-                *__p = unsafe { (*__p).offset(1) };
-                __t
+                let __old = ptr2;
+                ptr2 = unsafe { ptr2.offset(1) };
+                __old
             } = '\"' as i32 as i8
         };
         while unsafe { *ptr } != 0 {
@@ -1119,36 +1071,32 @@ extern "C" fn print_string_ptr(str: *const i8, p: *mut Printbuffer) -> *mut i8 {
             {
                 unsafe {
                     *{
-                        let __p = &mut ptr2;
-                        let __t = *__p;
-                        *__p = unsafe { (*__p).offset(1) };
-                        __t
+                        let __old = ptr2;
+                        ptr2 = unsafe { ptr2.offset(1) };
+                        __old
                     } = unsafe {
                         *{
-                            let __p = &mut ptr;
-                            let __t = *__p;
-                            *__p = unsafe { (*__p).offset(1) };
-                            __t
+                            let __old = ptr;
+                            ptr = unsafe { ptr.offset(1) };
+                            __old
                         }
                     } as i8
                 };
             } else {
                 unsafe {
                     *{
-                        let __p = &mut ptr2;
-                        let __t = *__p;
-                        *__p = unsafe { (*__p).offset(1) };
-                        __t
+                        let __old = ptr2;
+                        ptr2 = unsafe { ptr2.offset(1) };
+                        __old
                     } = '\\' as i32 as i8
                 };
                 '__s14: {
                     match {
                         token = unsafe {
                             *{
-                                let __p = &mut ptr;
-                                let __t = *__p;
-                                *__p = unsafe { (*__p).offset(1) };
-                                __t
+                                let __old = ptr;
+                                ptr = unsafe { ptr.offset(1) };
+                                __old
                             }
                         } as u8;
                         token
@@ -1156,70 +1104,63 @@ extern "C" fn print_string_ptr(str: *const i8, p: *mut Printbuffer) -> *mut i8 {
                         92 => {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr2;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr2;
+                                    ptr2 = unsafe { ptr2.offset(1) };
+                                    __old
                                 } = '\\' as i32 as i8
                             };
                         }
                         34 => {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr2;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr2;
+                                    ptr2 = unsafe { ptr2.offset(1) };
+                                    __old
                                 } = '\"' as i32 as i8
                             };
                         }
                         8 => {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr2;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr2;
+                                    ptr2 = unsafe { ptr2.offset(1) };
+                                    __old
                                 } = 'b' as i32 as i8
                             };
                         }
                         12 => {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr2;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr2;
+                                    ptr2 = unsafe { ptr2.offset(1) };
+                                    __old
                                 } = 'f' as i32 as i8
                             };
                         }
                         10 => {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr2;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr2;
+                                    ptr2 = unsafe { ptr2.offset(1) };
+                                    __old
                                 } = 'n' as i32 as i8
                             };
                         }
                         13 => {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr2;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr2;
+                                    ptr2 = unsafe { ptr2.offset(1) };
+                                    __old
                                 } = 'r' as i32 as i8
                             };
                         }
                         9 => {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr2;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr2;
+                                    ptr2 = unsafe { ptr2.offset(1) };
+                                    __old
                                 } = 't' as i32 as i8
                             };
                         }
@@ -1250,18 +1191,16 @@ extern "C" fn print_string_ptr(str: *const i8, p: *mut Printbuffer) -> *mut i8 {
         }
         unsafe {
             *{
-                let __p = &mut ptr2;
-                let __t = *__p;
-                *__p = unsafe { (*__p).offset(1) };
-                __t
+                let __old = ptr2;
+                ptr2 = unsafe { ptr2.offset(1) };
+                __old
             } = '\"' as i32 as i8
         };
         unsafe {
             *{
-                let __p = &mut ptr2;
-                let __t = *__p;
-                *__p = unsafe { (*__p).offset(1) };
-                __t
+                let __old = ptr2;
+                ptr2 = unsafe { ptr2.offset(1) };
+                __old
             } = 0 as i8
         };
         return out;
@@ -1300,10 +1239,9 @@ extern "C" fn print_array(item: &CJSON, depth: i32, fmt: i32, p: *mut Printbuffe
         while !(child).is_null() {
             {
                 {
-                    let __p = &mut numentries;
-                    let __t = *__p;
-                    *__p += 1;
-                    __t
+                    let __old = numentries;
+                    numentries += 1;
+                    __old
                 };
                 child = unsafe { (*child).next }
             };
@@ -1349,19 +1287,17 @@ extern "C" fn print_array(item: &CJSON, depth: i32, fmt: i32, p: *mut Printbuffe
                     }
                     unsafe {
                         *{
-                            let __p = &mut ptr;
-                            let __t = *__p;
-                            *__p = unsafe { (*__p).offset(1) };
-                            __t
+                            let __old = ptr;
+                            ptr = unsafe { ptr.offset(1) };
+                            __old
                         } = ',' as i32 as i8
                     };
                     if fmt != 0 {
                         unsafe {
                             *{
-                                let __p = &mut ptr;
-                                let __t = *__p;
-                                *__p = unsafe { (*__p).offset(1) };
-                                __t
+                                let __old = ptr;
+                                ptr = unsafe { ptr.offset(1) };
+                                __old
                             } = ' ' as i32 as i8
                         };
                     }
@@ -1376,10 +1312,9 @@ extern "C" fn print_array(item: &CJSON, depth: i32, fmt: i32, p: *mut Printbuffe
             }
             unsafe {
                 *{
-                    let __p = &mut ptr;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = ptr;
+                    ptr = unsafe { ptr.offset(1) };
+                    __old
                 } = ']' as i32 as i8
             };
             unsafe { *ptr = 0 as i8 };
@@ -1409,10 +1344,9 @@ extern "C" fn print_array(item: &CJSON, depth: i32, fmt: i32, p: *mut Printbuffe
                 ret = print_value(child, depth + 1, fmt, core::ptr::null_mut());
                 unsafe {
                     *entries.offset({
-                        let __p = &mut i;
-                        let __t = *__p;
-                        *__p += 1;
-                        __t
+                        let __old = i;
+                        i += 1;
+                        __old
                     } as isize) = ret
                 };
                 if !(ret).is_null() {
@@ -1449,12 +1383,7 @@ extern "C" fn print_array(item: &CJSON, depth: i32, fmt: i32, p: *mut Printbuffe
                             }
                             break '__c18;
                         }
-                        {
-                            let __p = &mut i;
-                            let __t = *__p;
-                            *__p += 1;
-                            __t
-                        };
+                        i += 1;
                     }
                 }
                 unsafe { c_json_free.unwrap()(entries as *mut ()) };
@@ -1492,19 +1421,17 @@ extern "C" fn print_array(item: &CJSON, depth: i32, fmt: i32, p: *mut Printbuffe
                         if i != numentries - 1 {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr;
+                                    ptr = unsafe { ptr.offset(1) };
+                                    __old
                                 } = ',' as i32 as i8
                             };
                             if fmt != 0 {
                                 unsafe {
                                     *{
-                                        let __p = &mut ptr;
-                                        let __t = *__p;
-                                        *__p = unsafe { (*__p).offset(1) };
-                                        __t
+                                        let __old = ptr;
+                                        ptr = unsafe { ptr.offset(1) };
+                                        __old
                                     } = ' ' as i32 as i8
                                 };
                             }
@@ -1515,29 +1442,22 @@ extern "C" fn print_array(item: &CJSON, depth: i32, fmt: i32, p: *mut Printbuffe
                         };
                         break '__c19;
                     }
-                    {
-                        let __p = &mut i;
-                        let __t = *__p;
-                        *__p += 1;
-                        __t
-                    };
+                    i += 1;
                 }
             }
             unsafe { c_json_free.unwrap()(entries as *mut ()) };
             unsafe {
                 *{
-                    let __p = &mut ptr;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = ptr;
+                    ptr = unsafe { ptr.offset(1) };
+                    __old
                 } = ']' as i32 as i8
             };
             unsafe {
                 *{
-                    let __p = &mut ptr;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = ptr;
+                    ptr = unsafe { ptr.offset(1) };
+                    __old
                 } = 0 as i8
             };
         }
@@ -1565,10 +1485,9 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
         while !(child).is_null() {
             {
                 {
-                    let __p = &mut numentries;
-                    let __t = *__p;
-                    *__p += 1;
-                    __t
+                    let __old = numentries;
+                    numentries += 1;
+                    __old
                 };
                 child = unsafe { (*child).next }
             };
@@ -1586,19 +1505,17 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
             ptr = out;
             unsafe {
                 *{
-                    let __p = &mut ptr;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = ptr;
+                    ptr = unsafe { ptr.offset(1) };
+                    __old
                 } = '{' as i32 as i8
             };
             if fmt != 0 {
                 unsafe {
                     *{
-                        let __p = &mut ptr;
-                        let __t = *__p;
-                        *__p = unsafe { (*__p).offset(1) };
-                        __t
+                        let __old = ptr;
+                        ptr = unsafe { ptr.offset(1) };
+                        __old
                     } = '\n' as i32 as i8
                 };
                 {
@@ -1610,37 +1527,29 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
                         '__c21: loop {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr;
+                                    ptr = unsafe { ptr.offset(1) };
+                                    __old
                                 } = '\t' as i32 as i8
                             };
                             break '__c21;
                         }
-                        {
-                            let __p = &mut i;
-                            let __t = *__p;
-                            *__p += 1;
-                            __t
-                        };
+                        i += 1;
                     }
                 }
             }
             unsafe {
                 *{
-                    let __p = &mut ptr;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = ptr;
+                    ptr = unsafe { ptr.offset(1) };
+                    __old
                 } = '}' as i32 as i8
             };
             unsafe {
                 *{
-                    let __p = &mut ptr;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = ptr;
+                    ptr = unsafe { ptr.offset(1) };
+                    __old
                 } = 0 as i8
             };
             return out;
@@ -1655,31 +1564,24 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
             }
             unsafe {
                 *{
-                    let __p = &mut ptr;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = ptr;
+                    ptr = unsafe { ptr.offset(1) };
+                    __old
                 } = '{' as i32 as i8
             };
             if fmt != 0 {
                 unsafe {
                     *{
-                        let __p = &mut ptr;
-                        let __t = *__p;
-                        *__p = unsafe { (*__p).offset(1) };
-                        __t
+                        let __old = ptr;
+                        ptr = unsafe { ptr.offset(1) };
+                        __old
                     } = '\n' as i32 as i8
                 };
             }
             unsafe { *ptr = 0 as i8 };
             unsafe { (*p).offset += len };
             child = (*item).child;
-            {
-                let __p = &mut depth;
-                let __t = *__p;
-                *__p += 1;
-                __t
-            };
+            depth += 1;
             while !(child).is_null() {
                 if fmt != 0 {
                     ptr = ensure(p, depth);
@@ -1695,20 +1597,14 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
                             '__c23: loop {
                                 unsafe {
                                     *{
-                                        let __p = &mut ptr;
-                                        let __t = *__p;
-                                        *__p = unsafe { (*__p).offset(1) };
-                                        __t
+                                        let __old = ptr;
+                                        ptr = unsafe { ptr.offset(1) };
+                                        __old
                                     } = '\t' as i32 as i8
                                 };
                                 break '__c23;
                             }
-                            {
-                                let __p = &mut j;
-                                let __t = *__p;
-                                *__p += 1;
-                                __t
-                            };
+                            j += 1;
                         }
                     }
                     unsafe { (*p).offset += depth };
@@ -1722,19 +1618,17 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
                 }
                 unsafe {
                     *{
-                        let __p = &mut ptr;
-                        let __t = *__p;
-                        *__p = unsafe { (*__p).offset(1) };
-                        __t
+                        let __old = ptr;
+                        ptr = unsafe { ptr.offset(1) };
+                        __old
                     } = ':' as i32 as i8
                 };
                 if fmt != 0 {
                     unsafe {
                         *{
-                            let __p = &mut ptr;
-                            let __t = *__p;
-                            *__p = unsafe { (*__p).offset(1) };
-                            __t
+                            let __old = ptr;
+                            ptr = unsafe { ptr.offset(1) };
+                            __old
                         } = '\t' as i32 as i8
                     };
                 }
@@ -1754,20 +1648,18 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
                 if !(unsafe { (*child).next }).is_null() {
                     unsafe {
                         *{
-                            let __p = &mut ptr;
-                            let __t = *__p;
-                            *__p = unsafe { (*__p).offset(1) };
-                            __t
+                            let __old = ptr;
+                            ptr = unsafe { ptr.offset(1) };
+                            __old
                         } = ',' as i32 as i8
                     };
                 }
                 if fmt != 0 {
                     unsafe {
                         *{
-                            let __p = &mut ptr;
-                            let __t = *__p;
-                            *__p = unsafe { (*__p).offset(1) };
-                            __t
+                            let __old = ptr;
+                            ptr = unsafe { ptr.offset(1) };
+                            __old
                         } = '\n' as i32 as i8
                     };
                 }
@@ -1789,29 +1681,22 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
                         '__c24: loop {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr;
+                                    ptr = unsafe { ptr.offset(1) };
+                                    __old
                                 } = '\t' as i32 as i8
                             };
                             break '__c24;
                         }
-                        {
-                            let __p = &mut i;
-                            let __t = *__p;
-                            *__p += 1;
-                            __t
-                        };
+                        i += 1;
                     }
                 }
             }
             unsafe {
                 *{
-                    let __p = &mut ptr;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = ptr;
+                    ptr = unsafe { ptr.offset(1) };
+                    __old
                 } = '}' as i32 as i8
             };
             unsafe { *ptr = 0 as i8 };
@@ -1854,12 +1739,7 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
 
             /// Collect all the results into our arrays:
             (child = (*item).child);
-            {
-                let __p = &mut depth;
-                let __t = *__p;
-                *__p += 1;
-                __t
-            };
+            depth += 1;
             if fmt != 0 {
                 len += depth;
             }
@@ -1875,10 +1755,9 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
                 };
                 unsafe {
                     *entries.offset({
-                        let __p = &mut i;
-                        let __t = *__p;
-                        *__p += 1;
-                        __t
+                        let __old = i;
+                        i += 1;
+                        __old
                     } as isize) = {
                         ret = print_value(child, depth, fmt, core::ptr::null_mut());
                         ret
@@ -1926,12 +1805,7 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
                             }
                             break '__c26;
                         }
-                        {
-                            let __p = &mut i;
-                            let __t = *__p;
-                            *__p += 1;
-                            __t
-                        };
+                        i += 1;
                     }
                 }
                 unsafe { c_json_free.unwrap()(names as *mut ()) };
@@ -1947,10 +1821,9 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
             if fmt != 0 {
                 unsafe {
                     *{
-                        let __p = &mut ptr;
-                        let __t = *__p;
-                        *__p = unsafe { (*__p).offset(1) };
-                        __t
+                        let __old = ptr;
+                        ptr = unsafe { ptr.offset(1) };
+                        __old
                     } = '\n' as i32 as i8
                 };
             }
@@ -1972,20 +1845,14 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
                                     '__c28: loop {
                                         unsafe {
                                             *{
-                                                let __p = &mut ptr;
-                                                let __t = *__p;
-                                                *__p = unsafe { (*__p).offset(1) };
-                                                __t
+                                                let __old = ptr;
+                                                ptr = unsafe { ptr.offset(1) };
+                                                __old
                                             } = '\t' as i32 as i8
                                         };
                                         break '__c28;
                                     }
-                                    {
-                                        let __p = &mut j;
-                                        let __t = *__p;
-                                        *__p += 1;
-                                        __t
-                                    };
+                                    j += 1;
                                 }
                             }
                         }
@@ -2006,19 +1873,17 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
                         };
                         unsafe {
                             *{
-                                let __p = &mut ptr;
-                                let __t = *__p;
-                                *__p = unsafe { (*__p).offset(1) };
-                                __t
+                                let __old = ptr;
+                                ptr = unsafe { ptr.offset(1) };
+                                __old
                             } = ':' as i32 as i8
                         };
                         if fmt != 0 {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr;
+                                    ptr = unsafe { ptr.offset(1) };
+                                    __old
                                 } = '\t' as i32 as i8
                             };
                         }
@@ -2044,20 +1909,18 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
                         if i != numentries - 1 {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr;
+                                    ptr = unsafe { ptr.offset(1) };
+                                    __old
                                 } = ',' as i32 as i8
                             };
                         }
                         if fmt != 0 {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr;
+                                    ptr = unsafe { ptr.offset(1) };
+                                    __old
                                 } = '\n' as i32 as i8
                             };
                         }
@@ -2070,12 +1933,7 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
                         };
                         break '__c27;
                     }
-                    {
-                        let __p = &mut i;
-                        let __t = *__p;
-                        *__p += 1;
-                        __t
-                    };
+                    i += 1;
                 }
             }
             unsafe { c_json_free.unwrap()(names as *mut ()) };
@@ -2090,37 +1948,29 @@ extern "C" fn print_object(item: &CJSON, mut depth: i32, fmt: i32, p: *mut Print
                         '__c29: loop {
                             unsafe {
                                 *{
-                                    let __p = &mut ptr;
-                                    let __t = *__p;
-                                    *__p = unsafe { (*__p).offset(1) };
-                                    __t
+                                    let __old = ptr;
+                                    ptr = unsafe { ptr.offset(1) };
+                                    __old
                                 } = '\t' as i32 as i8
                             };
                             break '__c29;
                         }
-                        {
-                            let __p = &mut i;
-                            let __t = *__p;
-                            *__p += 1;
-                            __t
-                        };
+                        i += 1;
                     }
                 }
             }
             unsafe {
                 *{
-                    let __p = &mut ptr;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = ptr;
+                    ptr = unsafe { ptr.offset(1) };
+                    __old
                 } = '}' as i32 as i8
             };
             unsafe {
                 *{
-                    let __p = &mut ptr;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = ptr;
+                    ptr = unsafe { ptr.offset(1) };
+                    __old
                 } = 0 as i8
             };
         }
@@ -2344,7 +2194,7 @@ pub(crate) extern "C" fn c_json_print_buffered(
     fmt: i32,
 ) -> *mut i8 {
     unsafe {
-        let mut p: Printbuffer = unsafe { core::mem::zeroed() };
+        let mut p: Printbuffer = Printbuffer::default();
         p.buffer = unsafe { c_json_malloc.unwrap()(prebuffer as u64) } as *mut i8;
         p.length = prebuffer;
         p.offset = 0;
@@ -2360,10 +2210,9 @@ pub(crate) extern "C" fn c_json_get_array_size(array: &CJSON) -> i32 {
     while !(c).is_null() {
         {
             {
-                let __p = &mut i;
-                let __t = *__p;
-                *__p += 1;
-                __t
+                let __old = i;
+                i += 1;
+                __old
             };
             c = unsafe { (*c).next }
         };
@@ -2377,10 +2226,9 @@ pub(crate) extern "C" fn c_json_get_array_item(array: &CJSON, mut item: i32) -> 
     while !(c).is_null() && item > 0 {
         {
             {
-                let __p = &mut item;
-                let __t = *__p;
-                *__p -= 1;
-                __t
+                let __old = item;
+                item -= 1;
+                __old
             };
             c = unsafe { (*c).next }
         };
@@ -2410,14 +2258,12 @@ extern "C" fn c_json_strcasecmp(mut s1: *const i8, mut s2: *const i8) -> i32 {
             }
             {
                 {
-                    let __p = &mut s1;
-                    *__p = unsafe { (*__p).offset(1) };
-                    *__p
+                    s1 = unsafe { s1.offset(1) };
+                    s1
                 };
                 {
-                    let __p = &mut s2;
-                    *__p = unsafe { (*__p).offset(1) };
-                    *__p
+                    s2 = unsafe { s2.offset(1) };
+                    s2
                 }
             };
         }
@@ -2538,12 +2384,7 @@ pub(crate) extern "C" fn c_json_create_int_array(numbers: *const i32, count: i32
                 p = n;
                 break '__c36;
             }
-            {
-                let __p = &mut i;
-                let __t = *__p;
-                *__p += 1;
-                __t
-            };
+            i += 1;
         }
     }
     return a;
@@ -2570,12 +2411,7 @@ pub(crate) extern "C" fn c_json_create_float_array(numbers: *const f32, count: i
                 p = n;
                 break '__c37;
             }
-            {
-                let __p = &mut i;
-                let __t = *__p;
-                *__p += 1;
-                __t
-            };
+            i += 1;
         }
     }
     return a;
@@ -2602,12 +2438,7 @@ pub(crate) extern "C" fn c_json_create_double_array(numbers: *const f64, count: 
                 p = n;
                 break '__c38;
             }
-            {
-                let __p = &mut i;
-                let __t = *__p;
-                *__p += 1;
-                __t
-            };
+            i += 1;
         }
     }
     return a;
@@ -2637,12 +2468,7 @@ pub(crate) extern "C" fn c_json_create_string_array(
                 p = n;
                 break '__c39;
             }
-            {
-                let __p = &mut i;
-                let __t = *__p;
-                *__p += 1;
-                __t
-            };
+            i += 1;
         }
     }
     return a;
@@ -2755,10 +2581,9 @@ pub(crate) extern "C" fn c_json_detach_item_from_array(
         {
             c = unsafe { (*c).next };
             {
-                let __p = &mut which;
-                let __t = *__p;
-                *__p -= 1;
-                __t
+                let __old = which;
+                which -= 1;
+                __old
             }
         };
     }
@@ -2796,10 +2621,9 @@ pub(crate) extern "C" fn c_json_detach_item_from_object(
     while !(c).is_null() && c_json_strcasecmp(unsafe { (*c).string } as *const i8, string) != 0 {
         {
             {
-                let __p = &mut i;
-                let __t = *__p;
-                *__p += 1;
-                __t
+                let __old = i;
+                i += 1;
+                __old
             };
             c = unsafe { (*c).next }
         };
@@ -2828,10 +2652,9 @@ pub(crate) extern "C" fn c_json_insert_item_in_array(
         {
             c = unsafe { (*c).next };
             {
-                let __p = &mut which;
-                let __t = *__p;
-                *__p -= 1;
-                __t
+                let __old = which;
+                which -= 1;
+                __old
             }
         };
     }
@@ -2859,10 +2682,9 @@ pub(crate) extern "C" fn c_json_replace_item_in_array(
         {
             c = unsafe { (*c).next };
             {
-                let __p = &mut which;
-                let __t = *__p;
-                *__p -= 1;
-                __t
+                let __old = which;
+                which -= 1;
+                __old
             }
         };
     }
@@ -2898,10 +2720,9 @@ pub(crate) extern "C" fn c_json_replace_item_in_object(
     while !(c).is_null() && c_json_strcasecmp(unsafe { (*c).string } as *const i8, string) != 0 {
         {
             {
-                let __p = &mut i;
-                let __t = *__p;
-                *__p += 1;
-                __t
+                let __old = i;
+                i += 1;
+                __old
             };
             c = unsafe { (*c).next }
         };
@@ -2987,41 +2808,36 @@ pub(crate) extern "C" fn c_json_minify(mut json: *mut i8) -> () {
     while unsafe { *json } != 0 {
         if unsafe { *json } as i32 == ' ' as i32 {
             {
-                let __p = &mut json;
-                let __t = *__p;
-                *__p = unsafe { (*__p).offset(1) };
-                __t
+                let __old = json;
+                json = unsafe { json.offset(1) };
+                __old
             };
         } else if unsafe { *json } as i32 == '\t' as i32 {
             {
-                let __p = &mut json;
-                let __t = *__p;
-                *__p = unsafe { (*__p).offset(1) };
-                __t
+                let __old = json;
+                json = unsafe { json.offset(1) };
+                __old
             };
         } else if unsafe { *json } as i32 == '\r' as i32 {
             {
-                let __p = &mut json;
-                let __t = *__p;
-                *__p = unsafe { (*__p).offset(1) };
-                __t
+                let __old = json;
+                json = unsafe { json.offset(1) };
+                __old
             };
         } else if unsafe { *json } as i32 == '\n' as i32 {
             {
-                let __p = &mut json;
-                let __t = *__p;
-                *__p = unsafe { (*__p).offset(1) };
-                __t
+                let __old = json;
+                json = unsafe { json.offset(1) };
+                __old
             };
         } else if unsafe { *json } as i32 == '/' as i32
             && unsafe { *json.offset(1 as isize) } as i32 == '/' as i32
         {
             while unsafe { *json } != 0 && unsafe { *json } as i32 != '\n' as i32 {
                 {
-                    let __p = &mut json;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = json;
+                    json = unsafe { json.offset(1) };
+                    __old
                 };
             }
         } else if unsafe { *json } as i32 == '/' as i32
@@ -3034,10 +2850,9 @@ pub(crate) extern "C" fn c_json_minify(mut json: *mut i8) -> () {
                     != 0
             {
                 {
-                    let __p = &mut json;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = json;
+                    json = unsafe { json.offset(1) };
+                    __old
                 };
             }
             {
@@ -3048,16 +2863,14 @@ pub(crate) extern "C" fn c_json_minify(mut json: *mut i8) -> () {
         } else if unsafe { *json } as i32 == '\"' as i32 {
             unsafe {
                 *{
-                    let __p = &mut into;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = into;
+                    into = unsafe { into.offset(1) };
+                    __old
                 } = unsafe {
                     *{
-                        let __p = &mut json;
-                        let __t = *__p;
-                        *__p = unsafe { (*__p).offset(1) };
-                        __t
+                        let __old = json;
+                        json = unsafe { json.offset(1) };
+                        __old
                     }
                 }
             };
@@ -3065,64 +2878,56 @@ pub(crate) extern "C" fn c_json_minify(mut json: *mut i8) -> () {
                 if unsafe { *json } as i32 == '\\' as i32 {
                     unsafe {
                         *{
-                            let __p = &mut into;
-                            let __t = *__p;
-                            *__p = unsafe { (*__p).offset(1) };
-                            __t
+                            let __old = into;
+                            into = unsafe { into.offset(1) };
+                            __old
                         } = unsafe {
                             *{
-                                let __p = &mut json;
-                                let __t = *__p;
-                                *__p = unsafe { (*__p).offset(1) };
-                                __t
+                                let __old = json;
+                                json = unsafe { json.offset(1) };
+                                __old
                             }
                         }
                     };
                 }
                 unsafe {
                     *{
-                        let __p = &mut into;
-                        let __t = *__p;
-                        *__p = unsafe { (*__p).offset(1) };
-                        __t
+                        let __old = into;
+                        into = unsafe { into.offset(1) };
+                        __old
                     } = unsafe {
                         *{
-                            let __p = &mut json;
-                            let __t = *__p;
-                            *__p = unsafe { (*__p).offset(1) };
-                            __t
+                            let __old = json;
+                            json = unsafe { json.offset(1) };
+                            __old
                         }
                     }
                 };
             }
             unsafe {
                 *{
-                    let __p = &mut into;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = into;
+                    into = unsafe { into.offset(1) };
+                    __old
                 } = unsafe {
                     *{
-                        let __p = &mut json;
-                        let __t = *__p;
-                        *__p = unsafe { (*__p).offset(1) };
-                        __t
+                        let __old = json;
+                        json = unsafe { json.offset(1) };
+                        __old
                     }
                 }
             };
         } else {
             unsafe {
                 *{
-                    let __p = &mut into;
-                    let __t = *__p;
-                    *__p = unsafe { (*__p).offset(1) };
-                    __t
+                    let __old = into;
+                    into = unsafe { into.offset(1) };
+                    __old
                 } = unsafe {
                     *{
-                        let __p = &mut json;
-                        let __t = *__p;
-                        *__p = unsafe { (*__p).offset(1) };
-                        __t
+                        let __old = json;
+                        json = unsafe { json.offset(1) };
+                        __old
                     }
                 }
             };

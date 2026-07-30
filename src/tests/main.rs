@@ -60,7 +60,7 @@ pub(crate) extern "C" fn dofile(filename: *const i8) -> () {
 }
 
 #[repr(C)]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Default)]
 pub(crate) struct Record {
     pub(crate) precision: *const i8,
     pub(crate) lat: f64,
@@ -181,12 +181,7 @@ pub(crate) extern "C" fn create_objects() -> () {
                 );
                 break '__c51;
             }
-            {
-                let __p = &mut i;
-                let __t = *__p;
-                *__p += 1;
-                __t
-            };
+            i += 1;
         }
     }
 
@@ -299,12 +294,7 @@ pub(crate) extern "C" fn create_objects() -> () {
                 );
                 break '__c52;
             }
-            {
-                let __p = &mut i;
-                let __t = *__p;
-                *__p += 1;
-                __t
-            };
+            i += 1;
         }
     }
 

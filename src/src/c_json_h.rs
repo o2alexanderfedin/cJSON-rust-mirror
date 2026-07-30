@@ -20,7 +20,7 @@ pub const cJSON_StringIsConst: i32 = 512;
 
 /// The cJSON structure:
 #[repr(C)]
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Default)]
 pub(crate) struct CJSON {
     pub(crate) next: *mut CJSON,
     pub(crate) prev: *mut CJSON,
